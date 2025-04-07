@@ -85,12 +85,7 @@ const Sign_In=()=>{
 
                     
                     <CustomButton title="Sign In" onPress={onSignInPress} className="mt-6"/>
-                    <View>
-                    <SignedOut >
-        <Text className="text-2xl">You are signed out</Text>
-      </SignedOut>
-      <Text>Always show</Text>
-                    </View>
+                   
 
                    <OAuth/>
                     <Link  href="/sign-up" className="text-lg text-center text-general-200 mt-2">
