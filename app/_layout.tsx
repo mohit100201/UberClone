@@ -3,6 +3,12 @@ import { SplashScreen, Stack } from 'expo-router';
 import { useFonts } from 'expo-font';
 import "../global.css";
 
+import { ClerkProvider } from '@clerk/clerk-expo'
+import { tokenCache } from '@clerk/clerk-expo/token-cache'
+import { Slot } from 'expo-router'
+
+
+
 
 export default function RootLayout() {
   
@@ -18,6 +24,8 @@ export default function RootLayout() {
   
 
   return (
+    <ClerkProvider tokenCache={tokenCache}>
+      
    
       <Stack>
         <Stack.Screen name="index" options={{ headerShown: false }} />
@@ -25,6 +33,7 @@ export default function RootLayout() {
         <Stack.Screen name="(root)" options={{ headerShown: false }} />
         
       </Stack>
+      </ClerkProvider>
       
     
   );
