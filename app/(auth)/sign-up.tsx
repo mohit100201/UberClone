@@ -8,6 +8,7 @@ import OAuth from "@/components/OAuth";
 import { useSignUp } from '@clerk/clerk-expo'
 import ReactNativeModal from "react-native-modal";
 import { fetchAPI } from "@/lib/fetch";
+import CustomButton2 from "@/components/customButtons";
 
 
 
@@ -158,6 +159,8 @@ const Sign_Up=()=>{
 
                     
                     <CustomButton title="Sign Up" onPress={onSignUpPress} className="mt-6 p-3 "/>
+                    
+
 
                    <OAuth/>
                     <Link  href="/sign-in" className="text-lg text-center text-general-200 mt-2">
