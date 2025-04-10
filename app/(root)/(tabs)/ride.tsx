@@ -1,10 +1,12 @@
-import { View ,Text} from "react-native";
+import { Text , View } from "react-native"
+import MapView, { PROVIDER_DEFAULT } from "react-native-maps"
 
 const Ride=()=>{
     return(
-        <View>
-            <Text>Ride Screen new </Text>
-        </View>
+        <MapView provider={PROVIDER_DEFAULT} className="h-full w-full">
+            <Text className="h-full w-full">hello</Text>
+            
+        </MapView>
     )
 
 }

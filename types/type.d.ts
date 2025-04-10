@@ -40,7 +40,7 @@ declare interface Ride {
     origin_longitude: string;
     destination_latitude: number;
     destination_longitude: number;
-    ride_time: number;
+    ride_time: string;
     fare_price: string;
     payment_status: string;
     driver_id: number;
