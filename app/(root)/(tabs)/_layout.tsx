@@ -3,8 +3,8 @@ import { Tabs } from "expo-router"
 import { View , Image, ImageSourcePropType} from "react-native";
 const TabIcon =({source , focused}:{source:ImageSourcePropType , focused:Boolean})=>{
     return(
-        <View className={`flex flex-row justify-center items-center rounded-full ${focused?"bg-general-300":""}`}>
-            <View className={` rounded-full h-9 w-9 items-center justify-center ${focused?"bg-general-400":""}`}>
+        <View className={`flex flex-row h-11 w-11 justify-center items-center rounded-full ${focused?"bg-general-300":""}`}>
+            <View className={` rounded-full h-11 w-11 items-center justify-center ${focused?"bg-general-400":""}`}>
                 <Image source={source} tintColor="white" resizeMode="contain" className="w-8 h-8 " />
             </View>
 
