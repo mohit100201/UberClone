@@ -4,9 +4,33 @@ import { Alert, Image, Text, View } from "react-native";
 
 import CustomButton from "@/components/customButtons";
 import { icons } from "@/constants";
+import { useSSO } from '@clerk/clerk-expo'
+import React, { useCallback, useEffect } from 'react'
+import { googleOAuth } from "@/lib/auth";
 
 
 const OAuth = () => {
+
+  // Use the `useSSO()` hook to access the `startSSOFlow()` method
+  const { startSSOFlow } = useSSO()
+
+  const handelGoogleSignIn = useCallback(async () => {
+    try {
+      const result= await googleOAuth(startSSOFlow);
+      if(result.code==='session_exists'){
+        if (result.code === "session_exists") {
+          Alert.alert("Success", "Session exists. Redirecting to home screen.");
+          router.replace("/(root)/(tabs)/home");
+        }
+    
+        Alert.alert(result.success ? "Success" : "Error", result.message);
+      }
+    
+    } catch (err) {
+      
+      console.error(err)
+    }
+  }, [])
  
 
   
@@ -31,6 +55,7 @@ const OAuth = () => {
         )}
         bgVariant="outline"
         textVariant="primary"
+        onPress={handelGoogleSignIn}
         
       />
     </View>

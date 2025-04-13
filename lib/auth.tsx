@@ -1,5 +1,7 @@
 import * as Linking from "expo-linking";
 import * as SecureStore from "expo-secure-store";
+import { fetchAPI } from "./fetch";
+import * as AuthSession from 'expo-auth-session'
 
 
 
@@ -29,3 +31,53 @@ export const tokenCache = {
     },
   };
   
+
+  export const googleOAuth = async (startSSOFlow: any) => {
+    try {
+
+      
+      const { createdSessionId, setActive,  signUp } = await startSSOFlow({
+        strategy: 'oauth_google',
+     
+        redirectUrl: AuthSession.makeRedirectUri({ path: '/(root)/(tabs)/home' }),
+      })
+
+      
+      if (createdSessionId) {
+        if(setActive){
+          await setActive!({ session: createdSessionId });
+          if(signUp.createdUserId){
+            await fetchAPI("/(api)/user", {
+              method: "POST",
+              body: JSON.stringify({
+                name: `${signUp.firstName} ${signUp.lastName}`,
+                email: signUp.emailAddress,
+                clerkId: signUp.createdUserId,
+              }),
+            });
+
+          }
+          return {
+            success: true,
+            code: "success",
+            message: "You have successfully signed in with Google",
+          };
+
+        }
+      }
+
+      return {
+        success: false,
+        message: "An error occurred while signing in with Google",
+      };
+    } catch (err: any) {
+
+      console.error(err);
+    return {
+      success: false,
+      code: err.code,
+      message: err?.errors[0]?.longMessage,
+    };
+     
+    }
+  };
